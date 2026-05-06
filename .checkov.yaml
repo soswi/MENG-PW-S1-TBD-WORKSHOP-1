@@ -25,6 +25,7 @@ skip-check:
   - CKV_GCP_68  # Secure Boot - workshop cluster
   - CKV_GCP_9   # Automatic node repair - workshop cluster
   - CKV_SECRET_9 # JWT token in gha-creds file
+  - CKV_GCP_64  # Private Nodes - workshop cluster
 
 skip-path:
  - gha-creds-*json
