@@ -57,13 +57,17 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 
 1. Authors:
 
-   ***enter your group nr***
+   ***Group: 17***
 
-   ***link to forked repo***
+   ***[link to forked repo](https://github.com/soswi/MENG-PW-S1-TBD-WORKSHOP-1)***
 
 2. Follow all steps in README.md.
 
 3. From available Github Actions select and run destroy on master branch.
+
+![img.png](doc/images/p1-t3-1.png)
+![img.png](doc/images/p1-t3-2.png)
+![img.png](doc/images/p1-t3-3.png)
 
 4. Create new git branch and:
     1. Modify tasks-phase1.md file.
