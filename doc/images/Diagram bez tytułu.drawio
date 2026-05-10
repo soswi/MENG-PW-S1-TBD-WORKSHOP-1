@@ -1,0 +1,88 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Strona-1" id="wCJ87wMhVE4eparftSFy">
+    <mxGraphModel dx="1417" dy="792" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="hEfcne0vi1JimyRHh109-5" connectable="0" parent="1" style="group;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#007FFF;" value="" vertex="1">
+          <mxGeometry height="650" width="680" x="100" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="hEfcne0vi1JimyRHh109-3" parent="hEfcne0vi1JimyRHh109-5" style="rounded=0;whiteSpace=wrap;html=1;align=left;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="" vertex="1">
+          <mxGeometry height="650" width="680" as="geometry" />
+        </mxCell>
+        <mxCell id="hEfcne0vi1JimyRHh109-4" parent="hEfcne0vi1JimyRHh109-5" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontStyle=1;fontColor=#007FFF;fontSize=14;" value="&lt;h3&gt;GCP project: tbd-2026l-348561&lt;/h3&gt;" vertex="1">
+          <mxGeometry height="40" width="240" x="10" as="geometry" />
+        </mxCell>
+        <mxCell id="hEfcne0vi1JimyRHh109-17" edge="1" parent="hEfcne0vi1JimyRHh109-5" source="hEfcne0vi1JimyRHh109-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="hEfcne0vi1JimyRHh109-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="hEfcne0vi1JimyRHh109-6" parent="hEfcne0vi1JimyRHh109-5" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="&lt;font style=&quot;font-size: 14px; color: rgb(153, 51, 255);&quot;&gt;&lt;b style=&quot;&quot;&gt;GitHub Actions (CI/CD) &lt;/b&gt;&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;color: rgb(166, 128, 184);&quot;&gt;Workload Identity Federation tbd-2026l-348561-lab (owner)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="240" x="10" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="hEfcne0vi1JimyRHh109-22" edge="1" parent="hEfcne0vi1JimyRHh109-5" source="hEfcne0vi1JimyRHh109-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="hEfcne0vi1JimyRHh109-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="hEfcne0vi1JimyRHh109-24" connectable="0" parent="hEfcne0vi1JimyRHh109-5" style="group" value="" vertex="1">
+          <mxGeometry height="200" width="240" x="10" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="hEfcne0vi1JimyRHh109-7" parent="hEfcne0vi1JimyRHh109-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=top;fontColor=#00994D;" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Service accounts&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="200" width="240" as="geometry" />
+        </mxCell>
+        <mxCell id="hEfcne0vi1JimyRHh109-8" parent="hEfcne0vi1JimyRHh109-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" value="tbd-2026l-348561-lab roles/owner - Terraform/CI-CD" vertex="1">
+          <mxGeometry height="40" width="220" x="10" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="hEfcne0vi1JimyRHh109-15" parent="hEfcne0vi1JimyRHh109-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" value="tbd-2026l-348561-dataproc-sa dataproc.worker, bigquery.*" vertex="1">
+          <mxGeometry height="40" width="220" x="10" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="hEfcne0vi1JimyRHh109-16" parent="hEfcne0vi1JimyRHh109-24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#60a917;fontColor=#ffffff;strokeColor=#2D7600;" value="tbd-2026l-348561-airflow-sa GKE / Airflow workloads" vertex="1">
+          <mxGeometry height="40" width="220" x="10" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="hEfcne0vi1JimyRHh109-25" connectable="0" parent="hEfcne0vi1JimyRHh109-5" style="group" value="" vertex="1">
+          <mxGeometry height="200" width="240" x="10" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="hEfcne0vi1JimyRHh109-18" parent="hEfcne0vi1JimyRHh109-25" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;verticalAlign=top;fontColor=#CC0000;" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Infrastructure&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="200" width="240" as="geometry" />
+        </mxCell>
+        <mxCell id="hEfcne0vi1JimyRHh109-19" parent="hEfcne0vi1JimyRHh109-25" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e51400;fontColor=#ffffff;strokeColor=#B20000;" value="Dataproc cluster (tbd-cluster) 1 master + 2 workers + 1 SPOT" vertex="1">
+          <mxGeometry height="40" width="220" x="10" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="hEfcne0vi1JimyRHh109-20" parent="hEfcne0vi1JimyRHh109-25" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e51400;fontColor=#ffffff;strokeColor=#B20000;" value="GKE (airflow-cluster) Apache Airflow + Helm" vertex="1">
+          <mxGeometry height="40" width="220" x="10" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="hEfcne0vi1JimyRHh109-21" parent="hEfcne0vi1JimyRHh109-25" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e51400;fontColor=#ffffff;strokeColor=#B20000;" value="BigQuery External table on ORC files" vertex="1">
+          <mxGeometry height="40" width="220" x="10" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="hEfcne0vi1JimyRHh109-32" connectable="0" parent="hEfcne0vi1JimyRHh109-5" style="group" value="" vertex="1">
+          <mxGeometry height="340" width="240" x="370" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="hEfcne0vi1JimyRHh109-23" parent="hEfcne0vi1JimyRHh109-32" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;verticalAlign=top;fontColor=#FF8000;" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;GCS buckets&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="340" width="240" as="geometry" />
+        </mxCell>
+        <mxCell id="hEfcne0vi1JimyRHh109-26" parent="hEfcne0vi1JimyRHh109-32" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0a30a;fontColor=light-dark(#ffffff, #ededed);strokeColor=#BD7000;" value="tbd-2026l-348561-state Terraform remote state" vertex="1">
+          <mxGeometry height="40" width="220" x="10" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="hEfcne0vi1JimyRHh109-27" parent="hEfcne0vi1JimyRHh109-32" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0a30a;fontColor=light-dark(#ffffff, #ededed);strokeColor=#BD7000;" value="tbd-2026l-348561-code spark-job.py (PySpark jobs)" vertex="1">
+          <mxGeometry height="40" width="220" x="10" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="hEfcne0vi1JimyRHh109-28" parent="hEfcne0vi1JimyRHh109-32" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0a30a;fontColor=light-dark(#ffffff, #ededed);strokeColor=#BD7000;" value="tbd-2026l-348561-data ORC output (Shakespeare)" vertex="1">
+          <mxGeometry height="40" width="220" x="10" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="hEfcne0vi1JimyRHh109-29" parent="hEfcne0vi1JimyRHh109-32" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0a30a;fontColor=light-dark(#ffffff, #ededed);strokeColor=#BD7000;" value="tbd-2026l-348561-dataproc-staging Dataproc job artifacts" vertex="1">
+          <mxGeometry height="40" width="220" x="10" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="hEfcne0vi1JimyRHh109-30" parent="hEfcne0vi1JimyRHh109-32" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0a30a;fontColor=light-dark(#ffffff, #ededed);strokeColor=#BD7000;" value="tbd-2026l-348561-dataproc-temp Dataproc temporary data" vertex="1">
+          <mxGeometry height="40" width="220" x="10" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="hEfcne0vi1JimyRHh109-31" parent="hEfcne0vi1JimyRHh109-32" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0a30a;fontColor=light-dark(#ffffff, #ededed);strokeColor=#BD7000;" value="tbd-2026l-348561-artifact-reg Docker images (GCR)" vertex="1">
+          <mxGeometry height="40" width="220" x="10" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="hEfcne0vi1JimyRHh109-33" edge="1" parent="hEfcne0vi1JimyRHh109-5" source="hEfcne0vi1JimyRHh109-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="hEfcne0vi1JimyRHh109-27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="hEfcne0vi1JimyRHh109-34" edge="1" parent="hEfcne0vi1JimyRHh109-5" source="hEfcne0vi1JimyRHh109-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="hEfcne0vi1JimyRHh109-28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
