@@ -50,10 +50,10 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 
   Legend
 
-  - 🔵 Blue — setup steps (one-time configuration)
-  - 🟠 Orange — manual steps (GCP Console / GitHub UI)
-  - 🟢 Green — infrastructure ready
-  - 🟣 Purple — tasks to complete and document in tasks-phase1.md
+  - 🔵 Blue - setup steps (one-time configuration)
+  - 🟠 Orange - manual steps (GCP Console / GitHub UI)
+  - 🟢 Green - infrastructure ready
+  - 🟣 Purple - tasks to complete and document in tasks-phase1.md
 
 1. Authors:
 
@@ -81,7 +81,25 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 
 5. Analyze terraform code. Play with terraform plan, terraform graph to investigate different modules.
 
-    ***describe one selected module and put the output of terraform graph for this module here***
+    Module: dataproc
+    The dataproc module provisions a managed Apache Spark/Hadoop cluster on Google Cloud Dataproc. It creates the following resources:
+
+    google_project_service - enables the Dataproc API
+    google_service_account - dedicated service account for cluster nodes
+    google_project_iam_member - grants the service account roles: dataproc.worker, bigquery.dataEditor, bigquery.user
+    google_storage_bucket (×2) - staging and temp buckets for job artifacts
+    google_storage_bucket_iam_member (×2) - grants the service account object admin access to both buckets
+    google_dataproc_cluster - the actual cluster with 1 master + 2 workers + 1 SPOT preemptible worker, Jupyter optional component, and pip initialization action
+
+    The graph output shows that google_dataproc_cluster depends on all IAM members and bucket bindings being created first, which in turn depend on the service account.
+
+    ```
+    module.dataproc.google_dataproc_cluster -> module.dataproc.google_project_service.dataproc
+    module.dataproc.google_dataproc_cluster -> module.dataproc.google_storage_bucket_iam_member.staging_bucket_iam
+    module.dataproc.google_dataproc_cluster -> module.dataproc.google_project_iam_member.dataproc_worker
+    module.dataproc.google_project_iam_member.dataproc_worker -> module.dataproc.google_service_account.dataproc_sa
+
+    ```
 
 6. Reach YARN UI
 
@@ -124,7 +142,7 @@ create a sample usage profiles and add it to the Infracost task in CI/CD pipelin
     kubectl get svc -n airflow airflow-webserver                                                                                                                                                                 
                                               
                                                                                                                                                                                                                
-    ▎ Note: If EXTERNAL-IP shows <pending>, wait a moment and retry — LoadBalancer IP allocation may take 1-2 minutes.  
+    ▎ Note: If EXTERNAL-IP shows <pending>, wait a moment and retry - LoadBalancer IP allocation may take 1-2 minutes.  
 
     DAG files are synced automatically from your GitHub repo via git-sync sidecar.
     Airflow variables and the `google_cloud_default` GCP connection are also configured by Terraform.
