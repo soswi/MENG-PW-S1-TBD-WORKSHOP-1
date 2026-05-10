@@ -131,28 +131,42 @@ create a sample usage profiles and add it to the Infracost task in CI/CD pipelin
 
     a) In the Airflow UI (http://AIRFLOW_EXTERNAL_IP:8080, login: admin/admin), find the `dataproc_job` DAG, unpause it and trigger it manually.
 
-    ***place a screenshot of the DAG in the Airflow UI***
+    ![img.png](doc/images/p1-t9-1.png)
 
     b) The DAG will fail. Examine the task logs in the Airflow UI to find the root cause.
 
-    ***paste the relevant error message from the Airflow task log***
+    ![img.png](doc/images/p1-t9-2.png)
 
-    ***describe what the error is and how you found it***
+    The error was caused by a hardcoded GCS bucket name belonging to the instructor (tbd-2026l-9010-data) instead of the student's bucket. Line 19 of spark-job.py
+    The error was identified by examining the Spark driver logs stored in GCS (driveroutput.000000000), where a GoogleJsonResponseException: 404 Not Found was thrown when attempting to write ORC files to bucket tbd-2026l-9010-data - a bucket that does not exist in the student's GCP project. The fix was to change the bucket name to the correct one
 
     c) Fix the error in `modules/data-pipeline/resources/spark-job.py` and re-upload the file to GCS:
     ```bash
-    gsutil cp modules/data-pipeline/resources/spark-job.py gs://PROJECT_NAME-code/spark-job.py
+    dummy@xxx:~/MENG-PW-S1-TBD-WORKSHOP-1$ gsutil cp modules/data-pipeline/resources/spark-job.py gs://tbd-2026l-348561-code/spark-job.py
+    Google recommends using Gcloud storage CLI (https://docs.cloud.google.com/storage/docs/discover-object-storage-gcloud) instead of gsutil. Please refer to migration guide (https://docs.cloud.google.com/storage/docs/gsutil-transition-to-gcloud) for assistance.
+    Copying file://modules/data-pipeline/resources/spark-job.py [Content-Type=text/x-python]...
+    / [1 files][  1.5 KiB/  1.5 KiB]
+    Operation completed over 1 objects/1.5 KiB.
+
     ```
     Then trigger the DAG again from the Airflow UI.
 
-    ***paste the link to the fixed file***
+    ![img.png](doc/images/p1-t9-3.png)
 
     d) Verify the DAG completes successfully and check that ORC files were written to the data bucket:
     ```bash
-    gsutil ls gs://PROJECT_NAME-data/data/shakespeare/
+    dummy@xxx:~/MENG-PW-S1-TBD-WORKSHOP-1$ gsutil ls gs://tbd-2026l-348561-data/data/shakespeare/
+    Google recommends using Gcloud storage CLI (https://docs.cloud.google.com/storage/docs/discover-object-storage-gcloud) instead of gsutil. Please refer to migration guide (https://docs.cloud.google.com/storage/docs/gsutil-transition-to-gcloud) for assistance.
+    gs://tbd-2026l-348561-data/data/shakespeare/
+    gs://tbd-2026l-348561-data/data/shakespeare/_SUCCESS
+    gs://tbd-2026l-348561-data/data/shakespeare/part-00000-ce39b26a-cd1e-4645-8989-c7cae24693c2-c000.snappy.orc
+    gs://tbd-2026l-348561-data/data/shakespeare/part-00001-ce39b26a-cd1e-4645-8989-c7cae24693c2-c000.snappy.orc
+    gs://tbd-2026l-348561-data/data/shakespeare/part-00002-ce39b26a-cd1e-4645-8989-c7cae24693c2-c000.snappy.orc
+    gs://tbd-2026l-348561-data/data/shakespeare/part-00003-ce39b26a-cd1e-4645-8989-c7cae24693c2-c000.snappy.orc
+    (...)
     ```
 
-    ***place a screenshot of the successful DAG run in Airflow UI***
+    ![img.png](doc/images/p1-t9-4.png)
 
 11. Create a BigQuery dataset and an external table using SQL
 
