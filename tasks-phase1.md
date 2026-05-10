@@ -168,7 +168,7 @@ create a sample usage profiles and add it to the Infracost task in CI/CD pipelin
 
     ![img.png](doc/images/p1-t9-4.png)
 
-11. Create a BigQuery dataset and an external table using SQL
+10. Create a BigQuery dataset and an external table using SQL
 
     Using the ORC data produced by the Spark job in task 9, create a BigQuery dataset and an external table.
 
@@ -177,15 +177,34 @@ create a sample usage profiles and add it to the Infracost task in CI/CD pipelin
     bq mk --dataset --location=europe-west1 shakespeare
     ```
 
-    ***place the SQL code and query output here***
+    ```bash
+    dummy@xxx:~/MENG-PW-S1-TBD-WORKSHOP-1$ bq query --use_legacy_sql=false --project_id=tbd-2026l-348561 \
+    'SELECT * FROM `tbd-2026l-348561.shakespeare.shakespeare_orc` ORDER BY sum_word_count DESC LIMIT 10'
+    Waiting on bqjob_r144f1dabcfdc342f_0000019e11326823_1 ... (0s) Current status: DONE
+    +------+----------------+
+    | word | sum_word_count |
+    +------+----------------+
+    | the  |          25568 |
+    | I    |          21028 |
+    | and  |          19649 |
+    | to   |          17361 |
+    | of   |          16438 |
+    | a    |          13409 |
+    | you  |          12527 |
+    | my   |          11291 |
+    | in   |          10589 |
+    | is   |           8735 |
+    +------+----------------+
 
-    ***why does ORC not require a table schema?***
+    ```
 
-12. Add support for preemptible/spot instances in a Dataproc cluster
+    ORC (Optimized Row Columnar) is a self-describing format - it stores the schema (column names, data types, metadata) directly within the file itself. BigQuery can read this embedded schema automatically without requiring the user to define it manually.
+
+11. Add support for preemptible/spot instances in a Dataproc cluster
 
     ***place the link to the modified file and inserted terraform code***
 
-13. Triggered Terraform Destroy on Schedule or After PR Merge. Goal: make sure we never forget to clean up resources and burn money.
+12. Triggered Terraform Destroy on Schedule or After PR Merge. Goal: make sure we never forget to clean up resources and burn money.
 
 Add a new GitHub Actions workflow that:
   1. runs terraform destroy -auto-approve
