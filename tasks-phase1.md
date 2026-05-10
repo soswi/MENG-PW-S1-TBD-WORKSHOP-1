@@ -127,9 +127,43 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 For all the resources of type: `google_artifact_registry_repository`, `google_storage_bucket`
 create a sample usage profiles and add it to the Infracost task in CI/CD pipeline. Usage file [example](https://github.com/infracost/infracost/blob/master/infracost-usage-example.yml)
 
-   ***place the expected consumption you entered here***
+   ```yml
+    google_artifact_registry_repository.registry:
+        storage_gb: 10
+        monthly_egress_data_transfer_gb:
+            europe: 5
+            worldwide_excluding_asia_australia: 1
 
-   ***place the screenshot from infracost output here***
+    google_storage_bucket.tbd-code-bucket:
+        storage_gb: 10
+        monthly_class_a_operations: 1000
+        monthly_class_b_operations: 5000
+        monthly_data_retrieval_gb: 5
+
+    google_storage_bucket.tbd-data-bucket:
+        storage_gb: 50
+        monthly_class_a_operations: 5000
+        monthly_class_b_operations: 10000
+        monthly_data_retrieval_gb: 20
+   ```
+
+   ```
+    ──────────────────────────────────
+    4 projects have no cost estimate changes.
+    Run the following command to see their breakdown: infracost breakdown --path=/path/to/code
+
+    ──────────────────────────────────
+    91 cloud resources were detected:
+    ∙ 15 were estimated
+    ∙ 73 were free
+    ∙ 3 are not supported yet, see https://infracost.io/requested-resources:
+    ∙ 1 x google_app_engine_flexible_app_version
+    ∙ 1 x google_billing_budget
+    ∙ 1 x google_dataproc_cluster
+   ```
+
+   ![img.png](doc/images/p1-t8-1.png)
+   ![img.png](doc/images/p1-t8-2.png)
 
 9. Find and correct the error in spark-job.py
 
