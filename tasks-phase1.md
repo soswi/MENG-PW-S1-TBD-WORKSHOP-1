@@ -251,8 +251,49 @@ Steps:
 
 Hint: use the existing `.github/workflows/destroy.yml` as a starting point.
 
-***paste workflow YAML here***
+```yml
+   name: Auto Destroy
 
-***paste screenshot/log snippet confirming the auto-destroy ran***
+    on:
+    schedule:
+        - cron: '0 20 * * *'  # every day at 20:00 UTC
+    pull_request:
+        types: [closed]
+        branches:
+        - master
 
-***write one sentence why scheduling cleanup helps in this workshop***
+    permissions: read-all
+
+    jobs:
+    auto-destroy:
+        if: github.event_name == 'schedule' || (github.event.pull_request.merged == true && contains(github.event.pull_request.title, '[CLEANUP]'))
+        runs-on: ubuntu-latest
+        permissions:
+        contents: write
+        id-token: write
+        pull-requests: write
+        issues: write
+        steps:
+        - uses: 'actions/checkout@v3'
+        - uses: hashicorp/setup-terraform@v2
+        with:
+            terraform_version: 1.11.0
+        - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+            token_format: 'access_token'
+            workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER_NAME }}
+            service_account: ${{ secrets.GCP_WORKLOAD_IDENTITY_SA_EMAIL }}
+        - name: Terraform Init
+        run: terraform init -backend-config=env/backend.tfvars
+        - name: Terraform Destroy
+        run: terraform destroy -no-color -var-file env/project.tfvars -auto-approve
+        continue-on-error: false 
+
+   ```
+
+![img.png](doc/images/p1-t12-1.png)
+![img.png](doc/images/p1-t12-2.png)
+
+Scheduling automatic cleanup ensures that expensive cloud resources (Dataproc, GKE) are always destroyed after each work session, preventing accidental credit consumption on student billing accounts.
