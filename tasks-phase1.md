@@ -127,9 +127,43 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 For all the resources of type: `google_artifact_registry_repository`, `google_storage_bucket`
 create a sample usage profiles and add it to the Infracost task in CI/CD pipeline. Usage file [example](https://github.com/infracost/infracost/blob/master/infracost-usage-example.yml)
 
-   ***place the expected consumption you entered here***
+   ```yml
+    google_artifact_registry_repository.registry:
+        storage_gb: 10
+        monthly_egress_data_transfer_gb:
+            europe: 5
+            worldwide_excluding_asia_australia: 1
 
-   ***place the screenshot from infracost output here***
+    google_storage_bucket.tbd-code-bucket:
+        storage_gb: 10
+        monthly_class_a_operations: 1000
+        monthly_class_b_operations: 5000
+        monthly_data_retrieval_gb: 5
+
+    google_storage_bucket.tbd-data-bucket:
+        storage_gb: 50
+        monthly_class_a_operations: 5000
+        monthly_class_b_operations: 10000
+        monthly_data_retrieval_gb: 20
+   ```
+
+   ```
+    ──────────────────────────────────
+    4 projects have no cost estimate changes.
+    Run the following command to see their breakdown: infracost breakdown --path=/path/to/code
+
+    ──────────────────────────────────
+    91 cloud resources were detected:
+    ∙ 15 were estimated
+    ∙ 73 were free
+    ∙ 3 are not supported yet, see https://infracost.io/requested-resources:
+    ∙ 1 x google_app_engine_flexible_app_version
+    ∙ 1 x google_billing_budget
+    ∙ 1 x google_dataproc_cluster
+   ```
+
+   ![img.png](doc/images/p1-t8-1.png)
+   ![img.png](doc/images/p1-t8-2.png)
 
 9. Find and correct the error in spark-job.py
 
@@ -251,8 +285,49 @@ Steps:
 
 Hint: use the existing `.github/workflows/destroy.yml` as a starting point.
 
-***paste workflow YAML here***
+```yml
+   name: Auto Destroy
 
-***paste screenshot/log snippet confirming the auto-destroy ran***
+    on:
+    schedule:
+        - cron: '0 20 * * *'  # every day at 20:00 UTC
+    pull_request:
+        types: [closed]
+        branches:
+        - master
 
-***write one sentence why scheduling cleanup helps in this workshop***
+    permissions: read-all
+
+    jobs:
+    auto-destroy:
+        if: github.event_name == 'schedule' || (github.event.pull_request.merged == true && contains(github.event.pull_request.title, '[CLEANUP]'))
+        runs-on: ubuntu-latest
+        permissions:
+        contents: write
+        id-token: write
+        pull-requests: write
+        issues: write
+        steps:
+        - uses: 'actions/checkout@v3'
+        - uses: hashicorp/setup-terraform@v2
+        with:
+            terraform_version: 1.11.0
+        - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+            token_format: 'access_token'
+            workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER_NAME }}
+            service_account: ${{ secrets.GCP_WORKLOAD_IDENTITY_SA_EMAIL }}
+        - name: Terraform Init
+        run: terraform init -backend-config=env/backend.tfvars
+        - name: Terraform Destroy
+        run: terraform destroy -no-color -var-file env/project.tfvars -auto-approve
+        continue-on-error: false 
+
+   ```
+
+![img.png](doc/images/p1-t12-1.png)
+![img.png](doc/images/p1-t12-2.png)
+
+Scheduling automatic cleanup ensures that expensive cloud resources (Dataproc, GKE) are always destroyed after each work session, preventing accidental credit consumption on student billing accounts.
