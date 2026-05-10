@@ -85,7 +85,15 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 
 6. Reach YARN UI
 
-   ***place the command you used for setting up the tunnel, the port and the screenshot of YARN UI here***
+
+   `gcloud compute ssh tbd-cluster-m \
+  --project tbd-2026l-348561 \
+  --zone europe-west1-b \
+  --tunnel-through-iap \
+  -- -L 0.0.0.0:25568:localhost:8088 -N`
+
+   ![img.png](doc/images/p1-t6-1.png)
+   ![img.png](doc/images/p1-t6-2.png)
 
    Hint: the Dataproc cluster has `internal_ip_only = true`, so you need to use an IAP tunnel.
    See: `gcloud compute ssh` with `-- -L <local_port>:localhost:<remote_port>` and `--tunnel-through-iap` flag.
