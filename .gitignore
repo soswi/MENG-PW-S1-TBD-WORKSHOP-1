@@ -38,3 +38,6 @@ terraform.rc
 .DS_Store
 bootstrap/terraform.tfstate_*
 bin/
+notebooks/.venv/
+data/
+notebooks/.ipynb_checkpoints/
